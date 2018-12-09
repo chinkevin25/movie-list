@@ -1,0 +1,38 @@
+body {
+  background-color: #ECF8F8;
+  width: 33%;
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+#app {
+  border: 1px solid black;
+}
+
+.movie-container {
+  text-align: left;
+  width: 90%;
+  margin: 20px auto;
+  display: grid;
+  
+}
+
+.movie-entry {
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid gray;
+}
+
+.movie-title {
+  margin-left: 10px;
+}
+
+form {
+  text-align: center;
+}
+
+

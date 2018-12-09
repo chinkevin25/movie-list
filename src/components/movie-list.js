@@ -1,16 +1,20 @@
 import React from 'react';
+import MovieEntry from './movie-entry';
 import _ from 'lodash';
 
 // this should be the functional stateless class that will render
 
-const MovieList = (props) => {
+const MovieList = ({movies}) => {
 
-  const movies = _.map(props.data.movies, movie => {
-    return <div> {movie.title} </div>
+  const moviesArr = _.map(movies, movie => {
+    return <MovieEntry movie = {movie} />
   });
+
   return (
-  <div>{movies}</div>
-  )
+    <div class='movie-container'>
+      {moviesArr.length !== 0 ? moviesArr : 'NO MATCH FOUND'}
+    </div>
+  );
 }
 
 export default MovieList;
