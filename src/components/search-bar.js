@@ -7,10 +7,7 @@ const SearchBar = (props) => {
   return (
     <div>
       <form
-      onSubmit = { event => {
-        event.preventDefault();
-        props.handleSearch(props.movieList)
-        } } >
+      onSubmit = { props.handleSearch } >
         <input placeholder="Search..." id="search" />
         <button><i class="fas fa-search"></i></button>
       </form>

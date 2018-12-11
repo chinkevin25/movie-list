@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from '../components/movie-list.js';
 import SearchBar from './search-bar.js';
+import AddMovie from '../components/add-movie';
 import _ from 'lodash';
 
 // App is the component that will render everything else.
@@ -12,25 +13,35 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      movies : props.movies
+      movies : []
     };
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
-  // How do I make a helper function but still be able to call this.setState? By not using a fat arrow,
-  // I can't carry the lexical this... Do I need to bind the this.setState function somewhere?
+  handleSearch(event) {
+    event.preventDefault();
+    const searchTerm = document.getElementById('search').value;
+    const searchResult = _(this.props.movies).filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase())).value();
+    this.setState({movies : searchResult});
+  }
+
+  handleAdd(event) {
+    event.preventDefault();
+    const newMovie = document.getElementById('addMovie').value;
+    const movieList = this.props.movies.push({title: newMovie});
+    this.setState({
+      movies : movieList
+    })
+  }
 
   render() {
     return (
       <div>
         <h1> MOVIE LIST </h1>
+        <AddMovie handleAdd = {this.handleAdd}/>
         <SearchBar
-         handleSearch = {movies => {
-           const searchTerm = document.getElementById('search').value;
-           const searchResult = _(movies).filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase())).value();
-           this.setState({
-             movies: searchResult
-           });
-         }}
+         handleSearch = {this.handleSearch}
          movieList = {this.props.movies} />
         <MovieList movies = {this.state.movies} / >
       </div>

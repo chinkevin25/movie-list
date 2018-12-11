@@ -4,6 +4,6 @@ import App from './components/app.js';
 import data from './data/fakeData.js'
 // fix this to pass data for props
 ReactDOM.render(
-  <App movies = {data.movies} />,
+  <App movies = {[]} />,
   document.getElementById('app')
 );

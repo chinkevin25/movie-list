@@ -5,6 +5,8 @@ module.exports = {
     './dist/app': path.resolve(__dirname, 'src/index.js')
   },
 
+  mode: 'development',
+
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, './')
