@@ -11,7 +11,7 @@ const MovieList = ({movies}) => {
   });
 
   return (
-    <div class='movie-container'>
+    <div className='movie-container'>
       {moviesArr.length !== 0 ? moviesArr : 'NO MATCH FOUND'}
     </div>
   );

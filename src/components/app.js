@@ -29,10 +29,11 @@ class App extends React.Component {
   handleAdd(event) {
     event.preventDefault();
     const newMovie = document.getElementById('addMovie').value;
-    const movieList = this.props.movies.push({title: newMovie});
-    this.setState({
-      movies : movieList
-    })
+    console.log(this.props,'PROPS')
+    this.props.movies.push({title:newMovie});
+    // const movieList = this.props.movies.push({title: newMovie});
+    this.setState({movies : this.props.movies});
+
   }
 
   render() {
