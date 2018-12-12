@@ -6,8 +6,8 @@ import _ from 'lodash';
 
 const MovieList = ({movies}) => {
 
-  const moviesArr = _.map(movies, movie => {
-    return <MovieEntry movie = {movie} />
+  const moviesArr = _.map(movies, (movie, index) => {
+    return <MovieEntry movie = {movie} key={index} />
   });
 
   return (

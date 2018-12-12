@@ -21,19 +21,23 @@ class App extends React.Component {
 
   handleSearch(event) {
     event.preventDefault();
-    const searchTerm = document.getElementById('search').value;
+    const searchBar = document.getElementById('search');
+    const searchTerm = searchBar.value;
     const searchResult = _(this.props.movies).filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase())).value();
-    this.setState({movies : searchResult});
+    this.setState({movies : searchResult}, () => {
+      searchBar.value = '';
+    });
   }
 
   handleAdd(event) {
     event.preventDefault();
-    const newMovie = document.getElementById('addMovie').value;
-    console.log(this.props,'PROPS')
-    this.props.movies.push({title:newMovie});
-    // const movieList = this.props.movies.push({title: newMovie});
-    this.setState({movies : this.props.movies});
-
+    const addMovie = document.getElementById('addMovie');
+    const newMovie = addMovie.value;
+    const movieList = this.props.movies;
+    movieList.push({title:newMovie});
+    this.setState({movies : movieList}, ()=> {
+      addMovie.value = '';
+    });
   }
 
   render() {
