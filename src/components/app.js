@@ -15,9 +15,11 @@ class App extends React.Component {
     this.state = {
       movies : []
     };
+
     this.handleSearch = this.handleSearch.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-  }
+    this.handleSearch = this.handleSearch.bind(this);
+  };
 
   handleSearch(event) {
     event.preventDefault();
@@ -27,7 +29,7 @@ class App extends React.Component {
     this.setState({movies : searchResult}, () => {
       searchBar.value = '';
     });
-  }
+  };
 
   handleAdd(event) {
     event.preventDefault();
@@ -38,7 +40,11 @@ class App extends React.Component {
     this.setState({movies : movieList}, ()=> {
       addMovie.value = '';
     });
-  }
+  };
+
+  handleWatched(event) {
+    console.log('CLICKED');
+  };
 
   render() {
     return (
@@ -48,7 +54,7 @@ class App extends React.Component {
         <SearchBar
          handleSearch = {this.handleSearch}
          movieList = {this.props.movies} />
-        <MovieList movies = {this.state.movies} / >
+        <MovieList movies = {this.state.movies} handleWatched = {this.handleWatched} />
       </div>
     )
   }

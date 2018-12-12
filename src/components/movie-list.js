@@ -4,10 +4,10 @@ import _ from 'lodash';
 
 // this should be the functional stateless class that will render
 
-const MovieList = ({movies}) => {
+const MovieList = ({movies, handleWatched}) => {
 
   const moviesArr = _.map(movies, (movie, index) => {
-    return <MovieEntry movie = {movie} key={index} />
+    return <MovieEntry movie = {movie} key={index} handleWatched = {handleWatched} />
   });
 
   return (
