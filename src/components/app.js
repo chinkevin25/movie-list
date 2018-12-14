@@ -61,8 +61,20 @@ class App extends React.Component {
   };
 
   handleWatchedTab(event) {
-    // const filtered
-  }
+    const filteredMovies = _(this.state.movies).filter(movie => movie.watched === true).value();
+    this.setState({
+      filteredMovies: filteredMovies
+    });
+
+  };
+
+  handleToWatchTab(event) {
+    const filteredMovies = _(this.state.movies).filter(movie => movie.watched === false).value();
+    this.setState({
+      filteredMovies: filteredMovies
+    });
+  } 
+
   render() {
     return (
       <div>
@@ -71,8 +83,8 @@ class App extends React.Component {
         <SearchBar
           handleSearch={this.handleSearch}
           movieList={this.state.movies} />
-        <button>Watched</button>
-        <button>To Watch</button>
+        <button onClick={e => this.handleWatchedTab(e)}>Watched</button>
+        <button onClick={e => this.handleToWatchTab(e)}>To Watch</button>
         <MovieList movies={this.state.filteredMovies} handleWatched={this.handleWatched} />
       </div>
     )
