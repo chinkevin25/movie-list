@@ -1,12 +1,12 @@
 import React from 'react';
 
 const MovieEntry = ({movie, handleWatched}) => {
-  console.log(handleWatched,'### FROM MOVIE ENTRY')
+  console.log(movie);
   return (
   <div className='movie-entry'>
     <div className='movie-title'>
       {movie.title}
-      <button onClick = {event => handleWatched(event)} >Watched</button>
+      <button className="watch" data-movie={movie.title} onClick = {event => handleWatched(event)} >{movie.watched ? 'Watched' : 'To Watched'}</button>
     </div>
   </div>
   )

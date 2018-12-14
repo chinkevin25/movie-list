@@ -13,20 +13,22 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      movies : []
+      movies: [],
+      filteredMovies: []
     };
 
     this.handleSearch = this.handleSearch.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleWatched = this.handleWatched.bind(this);
   };
 
   handleSearch(event) {
     event.preventDefault();
     const searchBar = document.getElementById('search');
     const searchTerm = searchBar.value;
-    const searchResult = _(this.props.movies).filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase())).value();
-    this.setState({movies : searchResult}, () => {
+    const searchResult = _(this.state.movies).filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase())).value();
+    this.setState({ filteredMovies: searchResult }, () => {
       searchBar.value = '';
     });
   };
@@ -35,26 +37,43 @@ class App extends React.Component {
     event.preventDefault();
     const addMovie = document.getElementById('addMovie');
     const newMovie = addMovie.value;
-    const movieList = this.props.movies;
-    movieList.push({title:newMovie});
-    this.setState({movies : movieList}, ()=> {
+    const movieList = this.state.movies;
+    movieList.push({
+      title: newMovie,
+      watched: false
+    });
+    this.setState({ movies: movieList, filteredMovies: movieList }, () => {
       addMovie.value = '';
     });
   };
 
   handleWatched(event) {
-    console.log('CLICKED');
+    const currentState = this.state;
+    const movieTitle = event.target.dataset.movie;
+
+    _.each(currentState.movies, movie => {
+      if (movie.title === movieTitle) {
+        movie.watched = !movie.watched;
+      }
+
+    });
+    this.setState({ movies: currentState.movies });
   };
 
+  handleWatchedTab(event) {
+    // const filtered
+  }
   render() {
     return (
       <div>
         <h1> MOVIE LIST </h1>
-        <AddMovie handleAdd = {this.handleAdd}/>
+        <AddMovie handleAdd={this.handleAdd} />
         <SearchBar
-         handleSearch = {this.handleSearch}
-         movieList = {this.props.movies} />
-        <MovieList movies = {this.state.movies} handleWatched = {this.handleWatched} />
+          handleSearch={this.handleSearch}
+          movieList={this.state.movies} />
+        <button>Watched</button>
+        <button>To Watch</button>
+        <MovieList movies={this.state.filteredMovies} handleWatched={this.handleWatched} />
       </div>
     )
   }
