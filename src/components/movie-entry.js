@@ -6,7 +6,7 @@ const MovieEntry = ({movie, handleWatched}) => {
   <div className='movie-entry'>
     <div className='movie-title'>
       {movie.title}
-      <button className="watch" data-movie={movie.title} onClick = {event => handleWatched(event)} >{movie.watched ? 'Watched' : 'To Watched'}</button>
+      <button className="watch" data-movie={movie.title} onClick = {event => handleWatched(event)} >{movie.watched ? 'Watched' : 'To Watch'}</button>
     </div>
   </div>
   )
