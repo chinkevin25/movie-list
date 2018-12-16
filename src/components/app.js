@@ -7,6 +7,10 @@ import _ from 'lodash';
 // App is the component that will render everything else.
 // This needs to be a class component as this will need to access state
 
+// Technically App doesn't need to be stateful right? App doesn't care what data is in the Movie List. Therefore we could, in theory just use 
+// Movie List as the stateful component. This would let us access this.setState inside MovieList and only need to pass props one level down
+// Instead of two levels.
+
 class App extends React.Component {
 
   constructor(props) {
@@ -17,10 +21,12 @@ class App extends React.Component {
       filteredMovies: []
     };
 
+    // there is a babel preset that lets me use fat arrow in the body.
     this.handleSearch = this.handleSearch.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleWatched = this.handleWatched.bind(this);
+    this.handleDisplay = this.handleDisplay.bind(this);
   };
 
   handleSearch(event) {
@@ -40,7 +46,8 @@ class App extends React.Component {
     const movieList = this.state.movies;
     movieList.push({
       title: newMovie,
-      watched: false
+      watched: false,
+      display: false
     });
     this.setState({ movies: movieList, filteredMovies: movieList }, () => {
       addMovie.value = '';
@@ -75,6 +82,20 @@ class App extends React.Component {
     });
   } 
 
+  handleDisplay(event) {
+    const selectedMovie = event.target.dataset.movie;
+    const currentMovieList = this.state.movies;
+    _(currentMovieList).each(movie => {
+      if (movie.title === selectedMovie) {
+        movie.display = !movie.display;
+      }
+    });
+
+    this.setState({
+      movies: currentMovieList
+    });
+  }
+
   render() {
     return (
       <div>
@@ -82,10 +103,11 @@ class App extends React.Component {
         <AddMovie handleAdd={this.handleAdd} />
         <SearchBar
           handleSearch={this.handleSearch}
-          movieList={this.state.movies} />
+          movieList={this.state.movies} 
+        />
         <button onClick={e => this.handleWatchedTab(e)}>Watched</button>
         <button onClick={e => this.handleToWatchTab(e)}>To Watch</button>
-        <MovieList movies={this.state.filteredMovies} handleWatched={this.handleWatched} />
+        <MovieList movies={this.state.filteredMovies} handleWatched={this.handleWatched} handleDisplay ={this.handleDisplay} />
       </div>
     )
   }
