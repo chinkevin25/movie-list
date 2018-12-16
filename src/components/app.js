@@ -83,6 +83,7 @@ class App extends React.Component {
   } 
 
   handleDisplay(event) {
+    console.log('Inside Handle Display');
     const selectedMovie = event.target.dataset.movie;
     const currentMovieList = this.state.movies;
     _(currentMovieList).each(movie => {

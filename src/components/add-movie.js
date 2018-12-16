@@ -4,7 +4,7 @@ const AddMovie = props => {
 
   return (
     // need to add an event listener
-    <form onSubmit ={props.handleAdd}> 
+    <form onSubmit ={props.handleAdd} autoComplete='off'> 
       <input type='text' placeholder="Add movie title here" id='addMovie'/>
       <button>Add</button>
     </form>

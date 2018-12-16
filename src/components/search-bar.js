@@ -6,7 +6,7 @@ const SearchBar = (props) => {
   
   return (
     <div>
-      <form
+      <form autoComplete='off'
       onSubmit = { props.handleSearch } >
         <input placeholder="Search..." id="search" />
         <button><i className="fas fa-search"></i></button>

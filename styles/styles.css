@@ -22,7 +22,6 @@ h1 {
 }
 
 .movie-entry {
-  height: 50px;
   line-height: 50px;
   border: 1px solid gray;
 }
@@ -33,4 +32,8 @@ h1 {
 
 form {
   text-align: center;
+}
+
+button {
+  z-index: 1;
 }
