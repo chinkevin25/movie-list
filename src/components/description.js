@@ -9,6 +9,7 @@ const Details = ({movie, handleWatched}) => {
       <div>Run Time</div>
       <div>Metascore</div>
       <div>imbd Rating</div>
+      <img src='https://i.imgur.com/pdUySbA.jpg'/>
       <button className="watch" data-movie={movie.title} onClick = {event => handleWatched(event)} >{movie.watched ? 'Watched' : 'To Watch'}</button>
     </div>
   )

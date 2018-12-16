@@ -2,7 +2,6 @@ import React from 'react';
 import MovieEntry from './movie-entry';
 import _ from 'lodash';
 
-// this should be the functional stateless class that will render
 
 const MovieList = ({movies, handleWatched, handleDisplay}) => {
 
