@@ -55,6 +55,19 @@ class App extends React.Component {
   //   });
   // };
 
+  postMovie(body, callback) {
+    fetch('/addmovie',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    }).then(result => {
+      // call a get request!
+      result.json().then(console.log);
+    });
+  }
+
 
   handleAdd(event) {
     event.preventDefault();
@@ -63,16 +76,7 @@ class App extends React.Component {
     const newMovie = addMovie.value;
 
     const payload = {term: newMovie};
-    console.log(payload);
-    fetch('/addmovie',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    }).then(result => {
-      result.json().then(console.log);
-    });
+    this.postMovie(JSON.stringify(payload));
 
 
   }

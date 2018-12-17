@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const morgan = require('morgan');
+const {findMovieAPI} = require('../utils/moviedatabase.js');
 const app = express();
+
 
 
 
@@ -11,7 +13,9 @@ app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 
 app.post('/addmovie', (req,res) => {
-  console.log(req.body);
+  const term = req.body.term;
+  findMovieAPI(term);
+
   res.send(JSON.stringify('Post Request Successfuly Ended'));
 })
 
