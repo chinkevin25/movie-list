@@ -3,12 +3,11 @@ const request = require('request');
 
 const findMovieAPI = (term, callback) => {
 
-  // const searchTerm = term.replace(/\s/g, '%20');
   const uri = encodeURI(`https://api.themoviedb.org/3/search/movie?api_key=${TOKEN}&query=${term}`);
 
   options = {
     url: uri
-  }
+  };
 
   request(options, (err, res, body) => {
 

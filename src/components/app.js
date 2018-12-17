@@ -126,12 +126,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1> MOVIE LIST </h1>
-        <AddMovie handleAdd={this.handleAdd} />
-        <SearchBar
-          handleSearch={this.handleSearch}
-          movieList={this.state.movies}
-        />
+        <div id='banner'>Movie list</div>
+          <div id='inputs-container'>
+            <AddMovie handleAdd={this.handleAdd} />
+            <SearchBar
+              handleSearch={this.handleSearch}
+              movieList={this.state.movies}
+            />
+          </div>
         <button onClick={e => this.handleWatchedTab(e)}>Watched</button>
         <button onClick={e => this.handleToWatchTab(e)}>To Watch</button>
         <MovieList movies={this.state.filteredMovies} handleWatched={this.handleWatched} handleDisplay={this.handleDisplay} />
