@@ -55,16 +55,32 @@ class App extends React.Component {
   //   });
   // };
 
+
+  componentDidMount() {
+    this.getMovies();
+  }
+
+  getMovies() {
+    fetch('/getmovies')
+      .then(result => result.json())
+      .then(data => {
+        this.setState({
+          movies: data,
+          filteredMovies: data
+        });
+      });
+  }
+
+
   postMovie(body, callback) {
-    fetch('/addmovie',{
+    fetch('/addmovie', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: body
     }).then(result => {
-      // call a get request!
-      result.json().then(console.log);
+      this.getMovies();
     });
   }
 
@@ -75,11 +91,11 @@ class App extends React.Component {
     const addMovie = document.getElementById('addMovie');
     const newMovie = addMovie.value;
 
-    const payload = {term: newMovie};
+    const payload = { term: newMovie };
     this.postMovie(JSON.stringify(payload));
 
-
   }
+
   handleWatched(event) {
     const currentState = this.state;
     const movieTitle = event.target.dataset.movie;
@@ -88,7 +104,6 @@ class App extends React.Component {
       if (movie.title === movieTitle) {
         movie.watched = !movie.watched;
       }
-
     });
     this.setState({ movies: currentState.movies });
   };
@@ -98,7 +113,6 @@ class App extends React.Component {
     this.setState({
       filteredMovies: filteredMovies
     });
-
   };
 
   handleToWatchTab(event) {
@@ -106,7 +120,7 @@ class App extends React.Component {
     this.setState({
       filteredMovies: filteredMovies
     });
-  } 
+  }
 
   handleDisplay(event) {
     console.log('Inside Handle Display');
@@ -130,11 +144,11 @@ class App extends React.Component {
         <AddMovie handleAdd={this.handleAdd} />
         <SearchBar
           handleSearch={this.handleSearch}
-          movieList={this.state.movies} 
+          movieList={this.state.movies}
         />
         <button onClick={e => this.handleWatchedTab(e)}>Watched</button>
         <button onClick={e => this.handleToWatchTab(e)}>To Watch</button>
-        <MovieList movies={this.state.filteredMovies} handleWatched={this.handleWatched} handleDisplay ={this.handleDisplay} />
+        <MovieList movies={this.state.filteredMovies} handleWatched={this.handleWatched} handleDisplay={this.handleDisplay} />
       </div>
     )
   }

@@ -19,7 +19,7 @@ app.post('/addmovie', (req,res) => {
     if (err) {
       console.log(err);
     } else {
-      // console.log(db.Movies);
+      // this should be refactored into a the database file.
       db.Movies.findOrCreate({where: {movie_id: result.id}, defaults: {
         title : result.title,
         overview : result.overview,
@@ -30,6 +30,13 @@ app.post('/addmovie', (req,res) => {
         res.send(JSON.stringify('Post Request Successfuly Ended'));
       })
     }
+  });
+});
+
+app.get('/getmovies', (req, res) => {
+
+  db.Movies.findAll().then(result =>{
+    res.send(JSON.stringify(result));
   });
 })
 
