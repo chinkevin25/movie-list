@@ -40,22 +40,6 @@ class App extends React.Component {
   };
 
 
-  // handleAdd(event) {
-  //   event.preventDefault();
-  //   const addMovie = document.getElementById('addMovie');
-  //   const newMovie = addMovie.value;
-  //   const movieList = this.state.movies;
-  //   movieList.push({
-  //     title: newMovie,
-  //     watched: false,
-  //     display: false
-  //   });
-  //   this.setState({ movies: movieList, filteredMovies: movieList }, () => {
-  //     addMovie.value = '';
-  //   });
-  // };
-
-
   componentDidMount() {
     this.getMovies();
   }
@@ -67,6 +51,8 @@ class App extends React.Component {
         this.setState({
           movies: data,
           filteredMovies: data
+        }, () => {
+          document.getElementById('addMovie').value = '';
         });
       });
   }
