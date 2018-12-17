@@ -39,21 +39,43 @@ class App extends React.Component {
     });
   };
 
+
+  // handleAdd(event) {
+  //   event.preventDefault();
+  //   const addMovie = document.getElementById('addMovie');
+  //   const newMovie = addMovie.value;
+  //   const movieList = this.state.movies;
+  //   movieList.push({
+  //     title: newMovie,
+  //     watched: false,
+  //     display: false
+  //   });
+  //   this.setState({ movies: movieList, filteredMovies: movieList }, () => {
+  //     addMovie.value = '';
+  //   });
+  // };
+
+
   handleAdd(event) {
     event.preventDefault();
+    // should grab the term from state but for now I'll do the anti-pattern. Refactor later!
     const addMovie = document.getElementById('addMovie');
     const newMovie = addMovie.value;
-    const movieList = this.state.movies;
-    movieList.push({
-      title: newMovie,
-      watched: false,
-      display: false
-    });
-    this.setState({ movies: movieList, filteredMovies: movieList }, () => {
-      addMovie.value = '';
-    });
-  };
 
+    const payload = {term: newMovie};
+    console.log(payload);
+    fetch('/addmovie',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    }).then(result => {
+      result.json().then(console.log);
+    });
+
+
+  }
   handleWatched(event) {
     const currentState = this.state;
     const movieTitle = event.target.dataset.movie;
