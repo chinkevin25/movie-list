@@ -14,7 +14,13 @@ app.use(bodyparser.json());
 
 app.post('/addmovie', (req,res) => {
   const term = req.body.term;
-  findMovieAPI(term);
+  findMovieAPI(term, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+  });
 
   res.send(JSON.stringify('Post Request Successfuly Ended'));
 })

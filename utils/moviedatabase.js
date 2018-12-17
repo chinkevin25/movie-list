@@ -10,10 +10,15 @@ const findMovieAPI = (term, callback) => {
   }
 
   request(options, (err, res, body) => {
-    // let's only return one for now. Eventually we will want to have a feature
-    // that allows the user to search and add only certain movies from the search to
-    // the list.
-    console.log(JSON.parse(body).results[0]);
+
+    if (err) {
+      callback(err);
+    } else {
+      // let's only return one for now. Eventually we will want to have a feature
+      // that allows the user to search and add only certain movies from the search to
+      // the list.
+      callback(null, (JSON.parse(body).results[0]));
+    }
   });
 
 
