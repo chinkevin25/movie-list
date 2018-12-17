@@ -2,6 +2,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const morgan = require('morgan');
 const {findMovieAPI} = require('../utils/moviedatabase.js');
+const db = require('../database/index.js');
 const app = express();
 
 
@@ -18,11 +19,18 @@ app.post('/addmovie', (req,res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+      // console.log(db.Movies);
+      db.Movies.findOrCreate({where: {movie_id: result.id}, defaults: {
+        title : result.title,
+        overview : result.overview,
+        release_date : result.release_date,
+        vote_average : result.vote_average,
+        watched : 0
+      }}).then(() =>{
+        res.send(JSON.stringify('Post Request Successfuly Ended'));
+      })
     }
   });
-
-  res.send(JSON.stringify('Post Request Successfuly Ended'));
 })
 
 app.listen(3000, () =>{
